@@ -17,11 +17,26 @@ use App\Http\Controllers\SessionsController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('auth');
 
-Route::get('/login', [SessionsController::class,'create'])->name('login.index');
-Route::post('/login-insertar', [SessionsController::class,'store'])->name('login.store');
-Route::get('/logout', [SessionsController::class,'destroy'])->name('logout.destroy');
-Route::get('/register', [RegistroController::class,'create'])->name('register.index');
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// login 
+Route::get('/login', [SessionsController::class,'create'])
+->middleware('guest')
+->name('login.index');
+
+Route::post('/login-insertar', [SessionsController::class,'store'])
+->name('login.store');
+
+Route::get('/logout', [SessionsController::class,'destroy'])
+->middleware('auth')
+->name('logout.destroy');
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// registro 
+Route::get('/register', [RegistroController::class,'create'])
+->middleware('guest')
+->name('register.index');
 Route::post('/register-insertar', [RegistroController::class,'store'])->name('register.store');
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 

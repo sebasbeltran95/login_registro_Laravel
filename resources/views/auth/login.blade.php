@@ -10,7 +10,7 @@
         <input type="password"id="password" name="password" placeholder="Contraseña">
         @error('message')
         <p class="error">
-            *Error Usuario o Contraseña erronea
+            *{{ $message }}
         </p>
         @enderror
 

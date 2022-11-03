@@ -17,7 +17,13 @@ class RegistroController extends Controller
 
     public function store(Request $request){
 
-
+        $this->validate(request(),[
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+            'nombre' => 'required|string|min:8',
+            'apellido' => 'required',
+            'password_confirmation' => 'required|string|min:8'
+        ]);
         
         $user = new  User();
         $user->email                    =$request->email;
